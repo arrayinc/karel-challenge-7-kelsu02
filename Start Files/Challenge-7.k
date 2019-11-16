@@ -19,7 +19,43 @@ of 3rd, 5th, and 7th Streets.
 how many blank spaces there are between the desks, or how many spaces exist
 between the desks at the ends of each row and the walls of the classroom.
 What Karel does know is that each of the desks is exactly one unit wide
-and that there are no desks right up against the wall.
+and that there are no desks right up against the wall. 
 
 When Karel is finished, all the desks in the room should have a valentine!
 */
+
+import "turns";
+
+function eastWall() {
+	while (frontIsClear()) {
+		move();
+	}
+	turnRight();
+}
+
+function oddRows() {
+	move();
+	if (frontIsClear()) {
+		move();
+	}
+	turnRight();
+}
+
+function findDesks() {
+	while (frontIsClear()) {
+		move();
+		if (rightIsBlocked()) {
+			putBeeper();
+		}
+	}
+}
+
+function Solve(){
+	turnLeft();
+	while (frontIsClear()) {
+		oddRows();
+		findDesks();
+		turnAround();
+		eastWall();
+	}
+}
